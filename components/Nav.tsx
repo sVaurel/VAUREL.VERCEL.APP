@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import ThemeToggle from "@/components/ThemeToggle";
 
 type NavProps = {
   active?: "home" | "projects" | "shop" | "contact";
@@ -10,6 +11,12 @@ export default function Nav({ active, center }: NavProps) {
   return (
     <header className={center ? "nav nav-has-center" : "nav"}>
       <nav className="nav-left" aria-label="Primary navigation">
+        <Link
+          href="/contact"
+          className={active === "contact" ? "nav-contact active-link" : "nav-contact"}
+        >
+          GET IN TOUCH
+        </Link>
         <Link href="/" className={active === "home" ? "active-link" : undefined}>
           HOME
         </Link>
@@ -21,12 +28,7 @@ export default function Nav({ active, center }: NavProps) {
         </Link>
       </nav>
       {center ? <div className="nav-center">{center}</div> : null}
-      <Link
-        href="/contact"
-        className={active === "contact" ? "nav-contact active-link" : "nav-contact"}
-      >
-        GET IN TOUCH
-      </Link>
+      <ThemeToggle />
     </header>
   );
 }
