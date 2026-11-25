@@ -36,8 +36,9 @@ export const viewport: Viewport = {
   themeColor: "#ffffff",
 };
 
-// Runs before first paint so the saved theme applies with no light-mode flash.
-const themeInitScript = `(function(){try{var t=localStorage.getItem("vaurel-theme");if(t==="dark"||t==="light"){document.documentElement.dataset.theme=t;if(t==="dark"){var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content","#0b0b0c");}}}catch(e){}})();`;
+// Runs before first paint: uses the saved choice if there is one, otherwise dark
+// unless the device prefers light. Avoids any flash of the wrong theme.
+const themeInitScript = `(function(){var t;try{t=localStorage.getItem("vaurel-theme");}catch(e){}if(t!=="dark"&&t!=="light"){t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}document.documentElement.dataset.theme=t;if(t==="dark"){var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content","#0b0b0c");}})();`;
 
 export default function RootLayout({
   children,
