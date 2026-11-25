@@ -1,12 +1,14 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 
 type NavProps = {
   active?: "home" | "projects" | "shop" | "contact";
+  center?: ReactNode;
 };
 
-export default function Nav({ active }: NavProps) {
+export default function Nav({ active, center }: NavProps) {
   return (
-    <header className="nav">
+    <header className={center ? "nav nav-has-center" : "nav"}>
       <nav className="nav-left" aria-label="Primary navigation">
         <Link href="/" className={active === "home" ? "active-link" : undefined}>
           HOME
@@ -18,6 +20,7 @@ export default function Nav({ active }: NavProps) {
           SHOP
         </Link>
       </nav>
+      {center ? <div className="nav-center">{center}</div> : null}
       <Link
         href="/contact"
         className={active === "contact" ? "nav-contact active-link" : "nav-contact"}
