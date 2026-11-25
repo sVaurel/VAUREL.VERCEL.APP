@@ -36,11 +36,17 @@ export const viewport: Viewport = {
   themeColor: "#ffffff",
 };
 
+// Runs before first paint so the saved theme applies with no light-mode flash.
+const themeInitScript = `(function(){try{var t=localStorage.getItem("vaurel-theme");if(t==="dark"||t==="light"){document.documentElement.dataset.theme=t;if(t==="dark"){var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content","#0b0b0c");}}}catch(e){}})();`;
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body>{children}</body>
     </html>
   );
