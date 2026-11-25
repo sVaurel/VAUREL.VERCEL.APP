@@ -7,15 +7,22 @@ export default function Home() {
     <main className="site-shell home-page">
       <Nav active="home" />
 
-      <section className="home-image-full" aria-label="VAUREL YouTube channel">
+      <section className="home-image-full" aria-label="VAUREL">
         <Image
-          src="/vaurel-youtube.png"
-          alt="VAUREL YouTube channel"
-          width={607}
-          height={230}
+          src="/homelight.png"
+          alt="VAUREL — Creative commentary, posted weekly at 4:00 PM Pacific Time"
+          width={1672}
+          height={941}
           sizes="100vw"
-          priority
-          className="home-image-full-img"
+          className="home-image-full-img home-image-light"
+        />
+        <Image
+          src="/homedark.png"
+          alt="VAUREL — Creative commentary, posted weekly at 4:00 PM Pacific Time"
+          width={1672}
+          height={941}
+          sizes="100vw"
+          className="home-image-full-img home-image-dark"
         />
       </section>
 
