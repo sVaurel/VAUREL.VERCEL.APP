@@ -4,19 +4,34 @@ import { useState } from "react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 
-type ProjectKey = "edits" | "music" | "game" | "design";
+type ProjectKey = "saintvaurel" | "emberdeep" | "edits" | "music" | "design";
 
 const projects: Record<
   ProjectKey,
   { label: string; title: string; description: string; theme: string; number: string }
 > = {
+  saintvaurel: {
+    label: "SAINT VAUREL",
+    title: "Saint Vaurel",
+    description: "The Saint Vaurel project — a world of its own. Details coming soon.",
+    theme: "theme-saintvaurel",
+    number: "01",
+  },
+  emberdeep: {
+    label: "EMBERDEEP",
+    title: "EmberDeep",
+    description:
+      "An original game project with its own world, systems, atmosphere, and visual direction.",
+    theme: "theme-emberdeep",
+    number: "02",
+  },
   edits: {
     label: "EDITS",
     title: "edited VOD",
     description:
       "Long-form edits, pacing, sound design, motion, and storytelling built from raw footage.",
     theme: "theme-edits",
-    number: "01",
+    number: "03",
   },
   music: {
     label: "MUSIC",
@@ -24,15 +39,7 @@ const projects: Record<
     description:
       "Original beats and sound experiments designed to give visual work its own rhythm.",
     theme: "theme-music",
-    number: "02",
-  },
-  game: {
-    label: "GAME",
-    title: "EmberDeep",
-    description:
-      "An original game project with its own world, systems, atmosphere, and visual direction.",
-    theme: "theme-game",
-    number: "03",
+    number: "04",
   },
   design: {
     label: "DESIGN",
@@ -40,35 +47,38 @@ const projects: Record<
     description:
       "Brand identities, graphics, layouts, and visual systems made to feel instantly recognizable.",
     theme: "theme-design",
-    number: "04",
+    number: "05",
   },
 };
 
 export default function ProjectsClient() {
-  const [active, setActive] = useState<ProjectKey>("edits");
+  const [active, setActive] = useState<ProjectKey>("saintvaurel");
   const project = projects[active];
 
   return (
     <main className={`site-shell projects-page ${project.theme}`}>
-      <Nav active="projects" />
+      <Nav
+        active="projects"
+        center={
+          <div className="project-menu" aria-label="Project categories">
+            {(Object.keys(projects) as ProjectKey[]).map((key) => (
+              <button
+                key={key}
+                type="button"
+                className={active === key ? "project-tab active" : "project-tab"}
+                aria-pressed={active === key}
+                onMouseEnter={() => setActive(key)}
+                onFocus={() => setActive(key)}
+                onClick={() => setActive(key)}
+              >
+                {projects[key].label}
+              </button>
+            ))}
+          </div>
+        }
+      />
 
       <section className="projects-stage">
-        <div className="project-menu" aria-label="Project categories">
-          {(Object.keys(projects) as ProjectKey[]).map((key) => (
-            <button
-              key={key}
-              type="button"
-              className={active === key ? "project-tab active" : "project-tab"}
-              aria-pressed={active === key}
-              onMouseEnter={() => setActive(key)}
-              onFocus={() => setActive(key)}
-              onClick={() => setActive(key)}
-            >
-              {projects[key].label}
-            </button>
-          ))}
-        </div>
-
         <div className="project-feature" key={active}>
           <div className="project-number">{project.number}</div>
           <div className="project-title-wrap">
