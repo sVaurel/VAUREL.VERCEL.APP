@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 const siteUrl = "https://vaurel.vercel.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ["", "/projects", "/shop", "/contact"];
+  const routes = ["", "/projects", "/contact"];
 
   return routes.map((route) => ({
     url: `${siteUrl}${route}`,
