@@ -240,3 +240,7 @@ footer {
   .nav-has-center { padding: 12px 5vw; }
   footer { padding: 24px 5vw; gap: 20px; flex-direction: column; }
 }
+
+.home-image-dark { display: none; }
+:root[data-theme="dark"] .home-image-light { display: none; }
+:root[data-theme="dark"] .home-image-dark { display: block; }
